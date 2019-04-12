@@ -12,7 +12,7 @@ int main() {
 	}
 
 	btPush(tree, 1);
-
+  
 	btTraverse(tree);
 
 	btPush(tree, 124);
@@ -25,8 +25,10 @@ int main() {
 	btPush(tree, 125);
 	btPush(tree, 127);
 	btPush(tree, 130);
-
-	btTraverse(tree);
+  btPush(tree, -1);
+  btPush(tree, -5);
+  btPush(tree, -3);
+	btDebug(tree);
 
 	printf("%d\n", btFindAsymmetricalSubtrees(tree));
 	return 0;

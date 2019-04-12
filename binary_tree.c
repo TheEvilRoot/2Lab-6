@@ -87,13 +87,38 @@ void btTraverse(BinaryTree *tree) {
 		return;
 	}
 
-	printf("Tree at 0x%x: \n", tree);
-
 	if (tree->root != NULL) {
 		bnTraverse(tree->root);
 	}
+}
 
-	printf("End of tree\n");	
+void btDebug(BinaryTree *tree) {
+  if (tree == NULL) {
+    printf("Tree is NULL\n");
+    return;
+  }
+  
+  printf("Tree at 0x%x\n", tree);
+  bnDebug(tree->root, 0);
+}
+
+void bnDebug(BinaryTreeNode *node, int depth) {
+  for (int i = 0; i < depth; i++) {
+    printf("\t");
+  }
+  if (node == NULL) {
+    printf("NULL node\n");
+    return;
+  }
+  printf("Node %d at 0x%x\n", node->data, node);
+  
+  if (node->left != NULL) {
+    bnDebug(node->left, depth + 1);
+  }
+  
+  if (node->right != NULL) {
+    bnDebug(node->right, depth + 1);
+  }
 }
 
 void bnTraverse(BinaryTreeNode *node) {
