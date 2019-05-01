@@ -1,0 +1,4 @@
+language: c
+sudo: false
+script:
+	- gcc *.c -o 2lab6
