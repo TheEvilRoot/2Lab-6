@@ -1,4 +1,4 @@
 language: c
 sudo: false
-script:
-	- gcc *.c -o 2lab6
+compiler: gcc
+script: gcc *.c -o 2lab6
