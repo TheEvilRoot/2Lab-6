@@ -103,6 +103,8 @@ int main() {
     } while (1);
     printf("Ok. You added %d numbers\n", bnCountChildren(tree->root) + 1);
 
+    btTraverse(tree);
+
     printf("Asymmetric nodes has values: \n");
     int count = 0;
     int * values = btFindAsymmetricalSubtrees(tree, &count);

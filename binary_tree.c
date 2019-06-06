@@ -3,16 +3,7 @@
 
 #include "binary_tree.h"
 
-int comparePayload(payload i, payload j) {
-  return j - i;
-}
-
-// Printing a payload (ex. int)
-void printPayload(payload p){ 
-	printf("%d\n", p); 
-}
-
-BinaryTreeNode * newNode(payload data) {
+BinaryTreeNode * newNode(int data) {
 	BinaryTreeNode *node = (BinaryTreeNode*) calloc(1, sizeof(BinaryTreeNode));
 	
 	if (node == NULL) {
@@ -33,21 +24,7 @@ BinaryTree * emptyBinaryTree() {
 	return tree;
 }
 
-BinaryTree * binaryTreeOf(payload *items, int count) {
-	BinaryTree *tree = emptyBinaryTree();
-
-	if (tree == NULL) {
-		return NULL;
-	}
-	
-	for (int i = 0; i < count; i++) {
-		btPush(tree, items[i]);
-	}
-
-	return tree;
-}
-
-void btPush(BinaryTree *tree, payload data) {
+void btPush(BinaryTree *tree, int data) {
 	if (tree == NULL) {
 		return;
 	}
@@ -59,12 +36,12 @@ void btPush(BinaryTree *tree, payload data) {
 	}
 }
 
-void bnPush(BinaryTreeNode *node, payload data) {
+void bnPush(BinaryTreeNode *node, int data) {
 	if (node == NULL) {
 		return;
 	}
 	
-	int delta = comparePayload(node->data, data);
+	int delta = data - node->data;
 
 	// node->data is less then data
 	if (delta < 0) { 
@@ -92,35 +69,6 @@ void btTraverse(BinaryTree *tree) {
 	}
 }
 
-void btDebug(BinaryTree *tree) {
-  if (tree == NULL) {
-    printf("Tree is NULL\n");
-    return;
-  }
-  
-  printf("Tree at 0x%x\n", tree);
-  bnDebug(tree->root, 0);
-}
-
-void bnDebug(BinaryTreeNode *node, int depth) {
-  for (int i = 0; i < depth; i++) {
-    printf("\t");
-  }
-  if (node == NULL) {
-    printf("NULL node\n");
-    return;
-  }
-  printf("Node %d at 0x%x\n", node->data, node);
-  
-  if (node->left != NULL) {
-    bnDebug(node->left, depth + 1);
-  }
-  
-  if (node->right != NULL) {
-    bnDebug(node->right, depth + 1);
-  }
-}
-
 void bnTraverse(BinaryTreeNode *node) {
 	if (node == NULL) {
 		return;
@@ -130,7 +78,7 @@ void bnTraverse(BinaryTreeNode *node) {
 		bnTraverse(node->left);
 	}
 	
-	printPayload(node->data);
+	printf("%d\n", node->data);
 
 	if (node->right != NULL) {
 		bnTraverse(node->right);

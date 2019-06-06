@@ -3,16 +3,8 @@
 
 #include <stdio.h>
 
-#define payload int
-
-// Comparing payload (ex. int)
-int comparePayload(payload i, payload j);
-
-// Printing a payload (ex. int)
-void printPayload(payload p);
-
 struct bt_node {
-	payload data;
+	int data;
 
 	struct bt_node *left;
 	struct bt_node *right;
@@ -25,18 +17,14 @@ struct bt {
 typedef struct bt_node BinaryTreeNode;
 typedef struct bt BinaryTree;
 
-BinaryTreeNode * newNode(payload data);
+BinaryTreeNode * newNode(int data);
 BinaryTree * emptyBinaryTree(void);
-BinaryTree * binaryTreeOf(payload *items, int count);
 
-void btPush(BinaryTree *tree, payload data);
-void bnPush(BinaryTreeNode *node, payload data);
+void btPush(BinaryTree *tree, int data);
+void bnPush(BinaryTreeNode *node, int data);
 
 void btTraverse(BinaryTree *tree);
 void bnTraverse(BinaryTreeNode *node);
-
-void btDebug(BinaryTree *tree);
-void bnDebug(BinaryTreeNode *node, int depth);
 
 int bnCountChildren(BinaryTreeNode *node);
 
