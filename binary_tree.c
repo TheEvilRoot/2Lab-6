@@ -170,14 +170,21 @@ int bnIsAsymmetrical(BinaryTreeNode *node) {
 	return leftSide - rightSide != 0;
 }
 
-int bnFindAsymmetricalSubtrees(BinaryTreeNode *root) {
+int bnFindAsymmetricalSubtrees(BinaryTreeNode *root, int **valuesPtr, int *countPtr) {
 	int self = bnIsAsymmetrical(root);
-	int left = root->left == NULL ? 0 : bnFindAsymmetricalSubtrees(root->left);
-	int right = root->right == NULL ? 0 : bnFindAsymmetricalSubtrees(root->right);
+	int left = root->left == NULL ? 0 : bnFindAsymmetricalSubtrees(root->left, valuesPtr, countPtr);
+	int right = root->right == NULL ? 0 : bnFindAsymmetricalSubtrees(root->right, valuesPtr, countPtr);
+
+	if (self > 0) {
+	    countPtr[0]++;
+	    valuesPtr[0] = realloc(valuesPtr[0], sizeof(int) * countPtr[0]);
+	    valuesPtr[0][countPtr[0] - 1] = root->data;
+	}
+
 	return self + left + right;
 }
 
-int btFindAsymmetricalSubtrees(BinaryTree *tree) {
+int * btFindAsymmetricalSubtrees(BinaryTree *tree, int *countPtr) {
 	if (tree == NULL) {
 		return 0;
 	}
@@ -185,6 +192,12 @@ int btFindAsymmetricalSubtrees(BinaryTree *tree) {
 	if (tree->root == NULL) {
 		return 0;
 	}
-	
-	return bnFindAsymmetricalSubtrees(tree->root);
+
+	int *values = (int*) calloc(1, sizeof(int));
+	int count = 0;
+
+	bnFindAsymmetricalSubtrees(tree->root, &values, &count);
+
+	*countPtr = count;
+	return values;
 }

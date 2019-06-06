@@ -42,7 +42,7 @@ int bnCountChildren(BinaryTreeNode *node);
 
 int bnIsAsymmetrical(BinaryTreeNode *node);
 
-int bnFindAsymmetricalSubtrees(BinaryTreeNode *root);
-int btFindAsymmetricalSubtrees(BinaryTree *tree);
+int bnFindAsymmetricalSubtrees(BinaryTreeNode *root,int **valuesPtr, int *countPtr);
+int * btFindAsymmetricalSubtrees(BinaryTree *tree, int *countPtr);
 
 #endif
